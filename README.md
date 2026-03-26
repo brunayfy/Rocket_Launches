@@ -75,6 +75,11 @@ npm run coverage
 * Clean architecture
 * Automated tests
 
+## Future Improvements
+
+* Search Launches can lookup partial names
+
+
 ---
 
 Built with focus on production-ready patterns and developer experience.
