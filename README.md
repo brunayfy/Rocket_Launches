@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# 🚀 SpaceX Launches SPA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Single Page Application built with **React + Vite + TypeScript** to explore SpaceX launches with search, filters, pagination and detailed views.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Paginated launch list
+* Search by name (debounced)
+* Filters: success / upcoming
+* Launch detail page
+* Loading (skeleton), error and empty states
+* Responsive UI with Chakra UI
+* Dark mode 🌙
 
-## React Compiler
+## 🧱 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React + Vite + TypeScript
+* Chakra UI
+* React Router
+* TanStack Query (React Query)
+* Axios
+* Vitest + React Testing Library
+* MSW (API mocking)
 
-## Expanding the ESLint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+src/
+  app/
+  components/
+  features/
+    launches/
+  test/
+  theme/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Feature-based architecture for scalability and maintainability.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ▶️ Running the project
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
+
+Open:
+
+```bash
+http://localhost:5173
+```
+
+## 🧪 Tests
+
+```bash
+npm run test
+```
+
+Coverage:
+
+```bash
+npm run coverage
+```
+
+## 🎯 Technical Decisions
+
+* **React Query** for caching and smooth UX
+* **Chakra UI** for fast and consistent UI development
+* **Feature-based structure** for scalability
+* **MSW** for reliable API mocking in tests
+
+## 🚀 Highlights
+
+* URL-based state (filters & pagination)
+* Debounced search
+* Clean architecture
+* Automated tests
+
+---
+
+Built with focus on production-ready patterns and developer experience.
