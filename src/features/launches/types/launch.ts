@@ -5,8 +5,8 @@ export type Launch = {
   success: boolean | null
   upcoming: boolean
   details: string | null
-  rocket: string
-  launchpad: string
+  rocket: Rocket
+  launchpad: Launchpad
   links: {
     wikipedia?: string | null
     webcast?: string | null

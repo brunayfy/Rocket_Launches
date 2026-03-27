@@ -12,6 +12,9 @@ describe('LaunchCard', () => {
     date_utc: '2026-04-12T10:00:00.000Z',
     success: true,
     upcoming: false,
+    details: null,
+    rocket: { id: 'rocket-1', name: 'Mock Rocket' } as any,
+    launchpad: { id: 'launchpad-1', name: 'Mock Launchpad' } as any,
     links: {
       patch: {
         small: null,

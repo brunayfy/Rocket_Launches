@@ -1,23 +1,7 @@
 import { Box, Image, Text, Badge, VStack, HStack } from "@chakra-ui/react"
 import { useNavigate, useLocation } from "react-router-dom"
 import rocket from "../../../assets/rocket.png"
-
-type Launch = {
-  id: string
-  name: string
-  date_utc: string
-  success?: boolean | null
-  upcoming?: boolean
-  links: {
-    patch: {
-      small: string | null
-    }
-  }
-}
-
-type LaunchCardProps = {
-  launch: Launch
-}
+import { type Launch } from "../types/launch"
 
 function getStatusLabel(success?: boolean | null, upcoming?: boolean) {
   if (upcoming) return "Upcoming"
@@ -33,7 +17,7 @@ function getStatusPalette(success?: boolean | null, upcoming?: boolean) {
   return "gray"
 }
 
-export default function LaunchCard({ launch }: LaunchCardProps) {
+export default function LaunchCard({ launch }: {launch: Launch}) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -84,7 +68,22 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
         <Text color="mutedText" fontSize="sm">
           {new Date(launch.date_utc).toLocaleDateString()}
         </Text>
+        <VStack align="stretch" gap={1}>
+          {launch.rocket?.name && (
+            <Text fontSize="sm" color="mutedText">
+              🚀 {launch.rocket.name}
+            </Text>
+          )}
+
+          {launch.launchpad && (
+            <Text fontSize="sm" color="mutedText">
+              📍 {launch.launchpad.name}
+              {launch.launchpad.locality && ` — ${launch.launchpad.locality}`}
+            </Text>
+          )}
+        </VStack>
       </VStack>
+
     </Box>
   )
 }
