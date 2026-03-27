@@ -1,5 +1,10 @@
 import axios from "axios"
-import type { LaunchesResponse, Launch, Rocket, Launchpad } from "../types/launch"
+import type {
+  LaunchesResponse,
+  Launch,
+  Rocket,
+  Launchpad,
+} from "../types/launch"
 
 const API = import.meta.env.VITE_API_BASE_URL
 

@@ -17,7 +17,7 @@ function getStatusPalette(success?: boolean | null, upcoming?: boolean) {
   return "gray"
 }
 
-export default function LaunchCard({ launch }: {launch: Launch}) {
+export default function LaunchCard({ launch }: { launch: Launch }) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -60,7 +60,9 @@ export default function LaunchCard({ launch }: {launch: Launch}) {
             {launch.name}
           </Text>
 
-          <Badge colorPalette={getStatusPalette(launch.success, launch.upcoming)}>
+          <Badge
+            colorPalette={getStatusPalette(launch.success, launch.upcoming)}
+          >
             {getStatusLabel(launch.success, launch.upcoming)}
           </Badge>
         </HStack>
@@ -83,7 +85,6 @@ export default function LaunchCard({ launch }: {launch: Launch}) {
           )}
         </VStack>
       </VStack>
-
     </Box>
   )
 }

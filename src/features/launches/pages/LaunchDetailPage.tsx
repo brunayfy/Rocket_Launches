@@ -66,7 +66,6 @@ export default function LaunchDetailPage() {
   return (
     <Box minH="100vh" bg="bg" color="text" px={{ base: 4, md: 8 }} py={8}>
       <VStack align="stretch" gap={8}>
-        
         <HStack justify="space-between" wrap="wrap">
           <Box>
             <Text fontSize={{ base: "2xl", md: "4xl" }} fontWeight="bold">
@@ -142,8 +141,8 @@ export default function LaunchDetailPage() {
                   <strong>Name:</strong> {launchpad.name}
                 </Text>
                 <Text>
-                  <strong>Location:</strong>{" "}
-                  {launchpad.locality}, {launchpad.region}
+                  <strong>Location:</strong> {launchpad.locality},{" "}
+                  {launchpad.region}
                 </Text>
               </VStack>
             ) : (

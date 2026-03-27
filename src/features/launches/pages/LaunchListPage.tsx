@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-} from "@chakra-ui/react"
+import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useLaunches } from "../hooks/useLaunches"
@@ -170,8 +163,8 @@ export default function LaunchListPage() {
               opacity={heroVisible ? 1 : 0}
               transition="opacity 1400ms ease"
             >
-              Track missions across SpaceX’s launch history with powerful filters,
-              launch details, imagery, and mission context.
+              Track missions across SpaceX’s launch history with powerful
+              filters, launch details, imagery, and mission context.
             </Text>
           </VStack>
         </Flex>
@@ -266,8 +259,8 @@ export default function LaunchListPage() {
           </Heading>
 
           <Text color="mutedText" maxW="720px">
-            Search launches, narrow by mission status and date interval, and open
-            each mission for detailed information.
+            Search launches, narrow by mission status and date interval, and
+            open each mission for detailed information.
           </Text>
         </Box>
 
