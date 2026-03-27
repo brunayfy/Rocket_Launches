@@ -16,14 +16,30 @@ const config = defineConfig({
         xl: { value: "1rem" },
       },
     },
+    semanticTokens: {
+      colors: {
+        bg: {
+          value: { base: "#ffffff", _dark: "#0b0d10" },
+        },
+        cardBg: {
+          value: { base: "#f4f4f5", _dark: "#1a1d23" },
+        },
+        text: {
+          value: { base: "#111111", _dark: "#ffffff" },
+        },
+        mutedText: {
+          value: { base: "#555555", _dark: "#a0a0a0" },
+        },
+        border: {
+          value: { base: "#e2e8f0", _dark: "#2d3748" },
+        },
+      },
+    },
   },
   globalCss: {
-    html: {
-      colorPalette: "gray",
-    },
     body: {
-      bg: "black",
-      color: "white",
+      bg: "bg",
+      color: "text",
     },
     "*::selection": {
       bg: "brand.500",

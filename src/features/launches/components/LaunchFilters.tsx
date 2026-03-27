@@ -1,11 +1,10 @@
-import { Input, NativeSelect, Flex } from '@chakra-ui/react'
+import { Flex, Input, NativeSelect } from "@chakra-ui/react"
 
-//filtros completos(search + selects) para a página de listagem de lançamentos
 export default function LaunchFilters({
   search,
-  setParams,
   success,
   upcoming,
+  setParams,
 }: any) {
   return (
     <Flex gap={4} wrap="wrap" mb={6}>
@@ -13,6 +12,10 @@ export default function LaunchFilters({
         placeholder="Search launches"
         value={search}
         aria-label="Search launches"
+        bg="cardBg"
+        color="text"
+        borderColor="border"
+        _placeholder={{ color: "mutedText" }}
         onChange={(e) =>
           setParams((prev: any) => ({
             ...prev,
@@ -22,10 +25,13 @@ export default function LaunchFilters({
         }
       />
 
-      <NativeSelect.Root>
+      <NativeSelect.Root minW="180px">
         <NativeSelect.Field
           aria-label="Filter by success"
-          value={success || ''}
+          bg="cardBg"
+          color="text"
+          borderColor="border"
+          value={success || ""}
           onChange={(e) =>
             setParams((prev: any) => ({
               ...prev,
@@ -38,13 +44,16 @@ export default function LaunchFilters({
           <option value="true">Success</option>
           <option value="false">Failure</option>
         </NativeSelect.Field>
-        <NativeSelect.Indicator />
+        <NativeSelect.Indicator color="text" />
       </NativeSelect.Root>
 
-      <NativeSelect.Root>
+      <NativeSelect.Root minW="180px">
         <NativeSelect.Field
           aria-label="Filter by upcoming launches"
-          value={upcoming || ''}
+          bg="cardBg"
+          color="text"
+          borderColor="border"
+          value={upcoming || ""}
           onChange={(e) =>
             setParams((prev: any) => ({
               ...prev,
@@ -57,7 +66,7 @@ export default function LaunchFilters({
           <option value="true">Upcoming</option>
           <option value="false">Past</option>
         </NativeSelect.Field>
-        <NativeSelect.Indicator />
+        <NativeSelect.Indicator color="text" />
       </NativeSelect.Root>
     </Flex>
   )
