@@ -48,8 +48,17 @@ Open:
 ```bash
 http://localhost:5173
 ```
+Generate production build
+```bash
+npm run build
+```
 
 ## 🧪 Tests
+* **Vitest** + **React Testing Library**
+* **MSW (Mock Service Worker)** for API mocking
+* Covers : Filters (search, selects, date interval), Pagination, Navigation, Launch detail rendering, API integration.
+
+![coverage](https://img.shields.io/badge/coverage-87%25-brightgreen)
 
 ```bash
 npm run test
@@ -61,15 +70,12 @@ Coverage:
 npm run coverage
 ```
 
-Generate production build
-```bash
-npm run build
-```
+
 ## 🎯 Technical Decisions
 * **React Query** for caching and smooth UX on pagination and refetch.
 * **Chakra UI** for fast and consistent UI development. It creates accessible and responsive interfaces.
 * **Feature-based structure** for scalability and maintainability and clarity on the application field
-* **MSW** for reliable API mocking without dependency on external service availability, making more resilient testing.
+* **MSW  (Mock Service Worker)** for reliable API mocking without dependency on external service availability, making more resilient testing.
 
 ## 🚀 Highlights
 

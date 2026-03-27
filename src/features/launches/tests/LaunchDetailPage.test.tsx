@@ -28,12 +28,12 @@ describe('LaunchDetailPage', () => {
             </Routes>
           </MemoryRouter>
         </ChakraProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     )
 
     expect(await screen.findByText('Mock Launch')).toBeInTheDocument()
     expect(
-      await screen.findByText('This is a mocked launch used in tests.')
+      await screen.findByText('This is a mocked launch used in tests.'),
     ).toBeInTheDocument()
     expect(await screen.findByText(/Falcon 9/)).toBeInTheDocument()
     expect(await screen.findByText(/KSC LC 39A/)).toBeInTheDocument()
