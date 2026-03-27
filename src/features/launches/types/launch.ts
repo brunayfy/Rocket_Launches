@@ -1,25 +1,3 @@
-export type Launch = {
-  id: string
-  name: string
-  date_utc: string
-  success: boolean | null
-  upcoming: boolean
-  details: string | null
-  rocket: Rocket
-  launchpad: Launchpad
-  links: {
-    wikipedia?: string | null
-    webcast?: string | null
-    youtube_id?: string | null
-    flickr?: {
-      original: string[]
-    }
-    patch: {
-      small: string | null
-    }
-  }
-}
-
 export type Rocket = {
   id: string
   name: string
@@ -33,7 +11,45 @@ export type Launchpad = {
   region: string
 }
 
+export type LaunchLinks = {
+  patch: {
+    small: string | null
+  }
+  flickr?: {
+    original: string[]
+  }
+  wikipedia?: string | null
+  webcast?: string | null
+  youtube_id?: string | null
+}
+
+export type LaunchListItem = {
+  id: string
+  name: string
+  date_utc: string
+  success?: boolean | null
+  upcoming?: boolean
+  rocket: Rocket
+  launchpad: Launchpad
+  links: LaunchLinks
+}
+
+export type LaunchDetail = {
+  id: string
+  name: string
+  date_utc: string
+  success: boolean | null
+  upcoming: boolean
+  details: string | null
+  rocket: string
+  launchpad: string
+  links: LaunchLinks
+}
+
 export type LaunchesResponse = {
-  docs: Launch[]
+  docs: LaunchListItem[]
   hasNextPage: boolean
+  hasPrevPage?: boolean
+  page?: number
+  totalPages?: number
 }

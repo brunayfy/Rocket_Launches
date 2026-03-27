@@ -35,16 +35,19 @@ export default function LaunchDetailPage() {
     enabled: !!id,
   })
 
+  const rocketId = launch?.rocket
+  const launchpadId = launch?.launchpad
+
   const { data: rocket } = useQuery({
-    queryKey: ["rocket", launch?.rocket],
-    queryFn: () => getRocket(launch!.rocket),
-    enabled: !!launch?.rocket,
+    queryKey: ["rocket", rocketId],
+    queryFn: () => getRocket(rocketId!),
+    enabled: !!rocketId,
   })
 
   const { data: launchpad } = useQuery({
-    queryKey: ["launchpad", launch?.launchpad],
-    queryFn: () => getLaunchpad(launch!.launchpad),
-    enabled: !!launch?.launchpad,
+    queryKey: ["launchpad", launchpadId],
+    queryFn: () => getLaunchpad(launchpadId!),
+    enabled: !!launchpadId,
   })
 
   if (isLoading || !launch) {
@@ -56,11 +59,9 @@ export default function LaunchDetailPage() {
   }
 
   const status = getStatus(launch.success, launch.upcoming)
-
   const youtubeUrl = launch.links.youtube_id
     ? `https://www.youtube.com/embed/${launch.links.youtube_id}`
     : null
-
   const gallery = launch.links.flickr?.original || []
 
   return (
@@ -214,6 +215,7 @@ export default function LaunchDetailPage() {
                 <Image
                   key={img}
                   src={img}
+                  alt={`${launch.name} gallery image`}
                   borderRadius="xl"
                   objectFit="cover"
                   w="100%"

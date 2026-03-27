@@ -1,7 +1,11 @@
 import { Box, Image, Text, Badge, VStack, HStack } from "@chakra-ui/react"
 import { useNavigate, useLocation } from "react-router-dom"
-import rocket from "../../../assets/rocket.png"
-import { type Launch } from "../types/launch"
+import type { LaunchListItem } from "../types/launch"
+import fallback from "../../../assets/rocket.png"
+
+type LaunchCardProps = {
+  launch: LaunchListItem
+}
 
 function getStatusLabel(success?: boolean | null, upcoming?: boolean) {
   if (upcoming) return "Upcoming"
@@ -17,7 +21,7 @@ function getStatusPalette(success?: boolean | null, upcoming?: boolean) {
   return "gray"
 }
 
-export default function LaunchCard({ launch }: { launch: Launch }) {
+export default function LaunchCard({ launch }: LaunchCardProps) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -43,7 +47,7 @@ export default function LaunchCard({ launch }: { launch: Launch }) {
     >
       <VStack align="stretch" gap={3}>
         <Image
-          src={launch.links.patch.small || rocket}
+          src={launch.links.patch.small || fallback}
           alt={launch.name}
           h="140px"
           objectFit="contain"
@@ -51,7 +55,7 @@ export default function LaunchCard({ launch }: { launch: Launch }) {
           bg="bg"
           p={2}
           onError={(e) => {
-            e.currentTarget.src = rocket
+            e.currentTarget.src = fallback
           }}
         />
 
@@ -70,6 +74,7 @@ export default function LaunchCard({ launch }: { launch: Launch }) {
         <Text color="mutedText" fontSize="sm">
           {new Date(launch.date_utc).toLocaleDateString()}
         </Text>
+
         <VStack align="stretch" gap={1}>
           {launch.rocket?.name && (
             <Text fontSize="sm" color="mutedText">

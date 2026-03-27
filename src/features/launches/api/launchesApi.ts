@@ -1,7 +1,7 @@
 import axios from "axios"
 import type {
   LaunchesResponse,
-  Launch,
+  LaunchDetail,
   Rocket,
   Launchpad,
 } from "../types/launch"
@@ -53,8 +53,8 @@ export const getLaunches = async ({
   return data
 }
 
-export const getLaunch = async (id: string): Promise<Launch> => {
-  const { data } = await axios.get<Launch>(`${API}/launches/${id}`)
+export const getLaunch = async (id: string): Promise<LaunchDetail> => {
+  const { data } = await axios.get<LaunchDetail>(`${API}/launches/${id}`)
   return data
 }
 
@@ -63,6 +63,7 @@ export const getRocket = async (id: string): Promise<Rocket> => {
     query: { id },
     options: {},
   })
+
   return response.data.docs[0] as Rocket
 }
 
@@ -71,5 +72,6 @@ export const getLaunchpad = async (id: string): Promise<Launchpad> => {
     query: { id },
     options: {},
   })
+
   return response.data.docs[0] as Launchpad
 }
