@@ -2,13 +2,35 @@ export type Launch = {
   id: string
   name: string
   date_utc: string
-  success?: boolean
-  upcoming?: boolean
+  success: boolean | null
+  upcoming: boolean
+  details: string | null
+  rocket: string
+  launchpad: string
   links: {
+    wikipedia?: string | null
+    webcast?: string | null
+    youtube_id?: string | null
+    flickr?: {
+      original: string[]
+    }
     patch: {
       small: string | null
     }
   }
+}
+
+export type Rocket = {
+  id: string
+  name: string
+  type: string
+}
+
+export type Launchpad = {
+  id: string
+  name: string
+  locality: string
+  region: string
 }
 
 export type LaunchesResponse = {
