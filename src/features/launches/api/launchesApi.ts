@@ -1,27 +1,55 @@
-import axios from 'axios'
-import type { LaunchesResponse, Launchpad, Rocket } from '../types/launch'
+import axios from "axios"
+import type { LaunchesResponse, Launch, Rocket, Launchpad } from "../types/launch"
 
-const API = 'https://api.spacexdata.com/v4'
+const API = "https://api.spacexdata.com/v4"
 
-export const getLaunches = async ({ search, page, success, upcoming }: any): Promise<LaunchesResponse> => {
+type GetLaunchesParams = {
+  search: string
+  page: number
+  success?: string | null
+  upcoming?: string | null
+  from?: string | null
+  to?: string | null
+}
+
+export const getLaunches = async ({
+  search,
+  page,
+  success,
+  upcoming,
+  from,
+  to,
+}: GetLaunchesParams): Promise<LaunchesResponse> => {
+  const dateQuery =
+    from || to
+      ? {
+          date_utc: {
+            ...(from ? { $gte: `${from}T00:00:00.000Z` } : {}),
+            ...(to ? { $lte: `${to}T23:59:59.999Z` } : {}),
+          },
+        }
+      : {}
+
   const { data } = await axios.post<LaunchesResponse>(`${API}/launches/query`, {
     query: {
-      name: { $regex: search || '', $options: 'i' },
-      ...(success ? { success: success === 'true' } : {}),
-      ...(upcoming ? { upcoming: upcoming === 'true' } : {})
+      name: { $regex: search || "", $options: "i" },
+      ...(success ? { success: success === "true" } : {}),
+      ...(upcoming ? { upcoming: upcoming === "true" } : {}),
+      ...dateQuery,
     },
     options: {
       page,
       limit: 12,
-      sort: { date_utc: 'desc' },
-      populate: ['rocket', 'launchpad']
-    }
+      sort: { date_utc: "desc" },
+      populate: ["rocket", "launchpad"],
+    },
   })
+
   return data
 }
 
-export const getLaunch = async (id: string) => {
-  const { data } = await axios.get(`${API}/launches/${id}`)
+export const getLaunch = async (id: string): Promise<Launch> => {
+  const { data } = await axios.get<Launch>(`${API}/launches/${id}`)
   return data
 }
 

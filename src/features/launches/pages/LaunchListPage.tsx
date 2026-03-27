@@ -6,43 +6,48 @@ import LaunchFilters from "../components/LaunchFilters"
 import LaunchList from "../components/LaunchList"
 import { ColorModeButton } from "../../../components/ColorModeProvider"
 
+type SearchParamRecord = Record<string, string>
+
 export default function LaunchListPage() {
   const [params, setParamsRaw] = useSearchParams()
 
-  const setParams = (update: any) => {
-    const current = Object.fromEntries(params.entries())
-    const next = typeof update === "function" ? update(current) : update
+  const setParams = (
+    updater:
+      | SearchParamRecord
+      | ((prev: SearchParamRecord) => SearchParamRecord)
+  ) => {
+    const current: SearchParamRecord = Object.fromEntries(params.entries())
 
-    const cleaned = Object.fromEntries(
-      Object.entries(next).filter(
-        ([, value]) => value !== undefined && value !== null && value !== ""
-      )
-    )
+    const next = typeof updater === "function" ? updater(current) : updater
 
-    setParamsRaw(cleaned as Record<string, string>)
+    const cleaned: SearchParamRecord = Object.fromEntries(
+      Object.entries(next).filter(([, value]) => value !== "")
+    ) as SearchParamRecord
+
+    setParamsRaw(cleaned)
   }
 
   const search = params.get("search") || ""
-  const page = Number(params.get("page") || 1)
-  const success = params.get("success")
-  const upcoming = params.get("upcoming")
+  const page = Number(params.get("page") || "1")
+  const success = params.get("success") || ""
+  const upcoming = params.get("upcoming") || ""
+  const from = params.get("from") || ""
+  const to = params.get("to") || ""
 
   const debouncedSearch = useDebounce(search)
 
   const { data, isLoading, isError } = useLaunches({
     search: debouncedSearch,
     page,
-    success,
-    upcoming,
+    success: success || null,
+    upcoming: upcoming || null,
+    from: from || null,
+    to: to || null,
   })
 
   return (
     <Box minH="100vh" bg="bg" color="text">
-      <Box
-        px={{ base: 4, md: 8 }}
-        py={{ base: 6, md: 8 }}
-        bgGradient="linear(to-b, transparent, bg)"
-      >
+      <Box px={{ base: 4, md: 8 }} py={{ base: 6, md: 8 }}>
         <Flex justify="space-between" align="center" mb={6} gap={4} wrap="wrap">
           <Box>
             <Heading size="xl">SpaceX Launches</Heading>
@@ -58,6 +63,8 @@ export default function LaunchListPage() {
           search={search}
           success={success}
           upcoming={upcoming}
+          from={from}
+          to={to}
           setParams={setParams}
         />
 
@@ -82,9 +89,9 @@ export default function LaunchListPage() {
           <Button
             variant="outline"
             onClick={() =>
-              setParams((prev: any) => ({
+              setParams((prev) => ({
                 ...prev,
-                page: Math.max(1, page - 1),
+                page: String(Math.max(1, page - 1)),
               }))
             }
             disabled={page === 1}
@@ -97,9 +104,9 @@ export default function LaunchListPage() {
           <Button
             variant="outline"
             onClick={() =>
-              setParams((prev: any) => ({
+              setParams((prev) => ({
                 ...prev,
-                page: page + 1,
+                page: String(page + 1),
               }))
             }
             disabled={!data?.hasNextPage}
