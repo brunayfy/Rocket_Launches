@@ -1,7 +1,7 @@
 import axios from "axios"
 import type { LaunchesResponse, Launch, Rocket, Launchpad } from "../types/launch"
 
-const API = "https://api.spacexdata.com/v4"
+const API = import.meta.env.VITE_API_BASE_URL
 
 type GetLaunchesParams = {
   search: string
