@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, useLocation } from "react-router-dom"
 import { useLaunches } from "../hooks/useLaunches"
 import { useDebounce } from "../hooks/useDebounce"
 import LaunchFilters from "../components/LaunchFilters"
@@ -11,6 +11,7 @@ type SearchParamRecord = Record<string, string>
 
 export default function LaunchListPage() {
   const [params, setParamsRaw] = useSearchParams()
+  const location = useLocation()
   const [heroVisible, setHeroVisible] = useState(false)
 
   useEffect(() => {
@@ -56,6 +57,18 @@ export default function LaunchListPage() {
     from: from || null,
     to: to || null,
   })
+
+  useEffect(() => {
+    const restoreScrollY = location.state?.restoreScrollY
+
+    if (typeof restoreScrollY === "number") {
+      const timer = window.setTimeout(() => {
+        window.scrollTo({ top: restoreScrollY, behavior: "auto" })
+      }, 50)
+
+      return () => window.clearTimeout(timer)
+    }
+  }, [location.state, data])
 
   return (
     <Box minH="100vh" bg="bg" color="text">

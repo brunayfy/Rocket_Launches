@@ -41,7 +41,10 @@ export default function LaunchCard({ launch }: LaunchCardProps) {
       }}
       onClick={() =>
         navigate(`/launch/${launch.id}`, {
-          state: { from: `${location.pathname}${location.search}` },
+          state: {
+            from: `${location.pathname}${location.search}`,
+            scrollY: window.scrollY,
+          },
         })
       }
     >

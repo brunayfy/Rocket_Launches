@@ -28,6 +28,7 @@ export default function LaunchDetailPage() {
   const location = useLocation()
 
   const backUrl = location.state?.from || "/"
+  const backScrollY = location.state?.scrollY ?? 0
 
   const { data: launch, isLoading } = useQuery({
     queryKey: ["launch", id],
@@ -229,7 +230,9 @@ export default function LaunchDetailPage() {
         </Box>
 
         <Button asChild variant="outline" alignSelf="start">
-          <RouterLink to={backUrl}>← Back to launches</RouterLink>
+          <RouterLink to={backUrl} state={{ restoreScrollY: backScrollY }}>
+            ← Back to launches
+          </RouterLink>
         </Button>
       </VStack>
     </Box>
