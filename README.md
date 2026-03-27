@@ -6,7 +6,7 @@ A modern Single Page Application built with **React + Vite + TypeScript** to exp
 
 * Paginated launch list
 * Search by name (debounced)
-* Filters: success / upcoming
+* Filters: success / upcoming / from/to launch date
 * Launch detail page
 * Loading (skeleton), error and empty states
 * Responsive UI with Chakra UI
@@ -62,11 +62,10 @@ npm run coverage
 ```
 
 ## 🎯 Technical Decisions
-
-* **React Query** for caching and smooth UX
-* **Chakra UI** for fast and consistent UI development
-* **Feature-based structure** for scalability
-* **MSW** for reliable API mocking in tests
+* **React Query** for caching and smooth UX on pagination and refetch.
+* **Chakra UI** for fast and consistent UI development. It creates accessible and responsive interfaces.
+* **Feature-based structure** for scalability and maintainability and clarity on the application field
+* **MSW** for reliable API mocking without dependency on external service availability, making more resilient testing.
 
 ## 🚀 Highlights
 
@@ -77,8 +76,11 @@ npm run coverage
 
 ## Future Improvements
 
-* Search Launches can lookup partial names
-
+* **Search Launches**: add lookup of partial names
+* **Date Filter**: `date_utc` is not reliable for upcoming launches. Make if `upcoming:true` sort by `flight_number`. 
+* **Testing**: more robust testing
+* Infinite scroll
+* Better error treatment
 
 ---
 
