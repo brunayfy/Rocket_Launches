@@ -48,6 +48,10 @@ Open:
 ```bash
 http://localhost:5173
 ```
+
+Type `q` and Enter to close the server
+
+
 Generate production build
 ```bash
 npm run build
