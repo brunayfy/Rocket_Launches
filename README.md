@@ -2,6 +2,21 @@
 
 A modern Single Page Application built with **React + Vite + TypeScript** to explore SpaceX launches with search, filters, pagination and detailed views.
 
+## Demo
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>Hero & Scroll with DarkMode Toggle</strong><br/>
+      <img src="./src/assets/demo.gif" width="400"/>
+    </td>
+    <td align="center">
+      <strong>Filters & Details</strong><br/>
+      <img src="./src/assets/filtersdemo.gif" width="400"/>
+    </td>
+  </tr>
+</table>
+
 ## ✨ Features
 
 - Paginated launch list
