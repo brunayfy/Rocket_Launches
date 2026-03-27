@@ -7,7 +7,7 @@ A modern Single Page Application built with **React + Vite + TypeScript** to exp
 * Paginated launch list
 * Search by name (debounced)
 * Filters: success / upcoming / from/to launch date
-* Launch detail page
+* Launch detail page with external links and embedded video.
 * Loading (skeleton), error and empty states
 * Responsive UI with Chakra UI
 * Dark mode 🌙
@@ -61,6 +61,10 @@ Coverage:
 npm run coverage
 ```
 
+Generate production build
+```bash
+npm run build
+```
 ## 🎯 Technical Decisions
 * **React Query** for caching and smooth UX on pagination and refetch.
 * **Chakra UI** for fast and consistent UI development. It creates accessible and responsive interfaces.
@@ -81,6 +85,7 @@ npm run coverage
 * **Testing**: more robust testing
 * Infinite scroll
 * Better error treatment
+* Improve UI to look more professional and easy to use
 
 ---
 

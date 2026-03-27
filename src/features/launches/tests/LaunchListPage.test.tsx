@@ -1,19 +1,37 @@
-// integration test using React Query + Router + MSW
-import { render, screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 import LaunchListPage from '../pages/LaunchListPage'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { BrowserRouter } from 'react-router-dom'
+import { renderWithProviders } from '../../../test/render'
 
-const queryClient = new QueryClient()
+describe('LaunchListPage', () => {
+  it('loads and displays launches from the API', async () => {
+    renderWithProviders(<LaunchListPage />)
 
-it('renders mocked launch', async () => {
-  render(
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <LaunchListPage />
-      </BrowserRouter>
-    </QueryClientProvider>
-  )
+    expect(await screen.findByText('Mock Launch')).toBeInTheDocument()
+    expect(screen.getByText('Page 1')).toBeInTheDocument()
+  })
 
-  expect(await screen.findByText('Mock Launch')).toBeInTheDocument()
+  it('renders visible filter labels and controls', () => {
+    renderWithProviders(<LaunchListPage />)
+
+    expect(screen.getByText('Search')).toBeInTheDocument()
+    expect(screen.getByText('From')).toBeInTheDocument()
+    expect(screen.getByText('To')).toBeInTheDocument()
+
+    expect(screen.getByLabelText('Search launches')).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter by success')).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter by upcoming launches')).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter from date')).toBeInTheDocument()
+    expect(screen.getByLabelText('Filter to date')).toBeInTheDocument()
+  })
+
+  it('navigates to detail page on click', async () => {
+    renderWithProviders(<LaunchListPage />)
+
+    const card = await screen.findByText('Mock Launch')
+
+    fireEvent.click(card)
+
+    expect(await screen.findByText('Details')).toBeInTheDocument()
+  })
 })

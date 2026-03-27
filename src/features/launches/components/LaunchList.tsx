@@ -7,7 +7,7 @@ export default function LaunchList({ data, isLoading }: any) {
   }
 
   return (
-    <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+    <SimpleGrid columns={[1, 2, 3]} gap={6}>
       {isLoading
         ? Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} h="200px" borderRadius="xl" />)
         : data?.docs.map((l: any) => <LaunchCard key={l.id} launch={l} />)}
